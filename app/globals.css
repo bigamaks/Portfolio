@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-inter);
@@ -13,6 +15,11 @@
 body {
   background: var(--color-cream);
   color: var(--color-ink);
+}
+
+.dark body {
+  background: var(--color-ink);
+  color: var(--color-cream);
 }
 
 html {

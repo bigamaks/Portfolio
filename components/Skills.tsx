@@ -68,36 +68,76 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="mx-auto max-w-7xl overflow-hidden px-6 py-28"
+      className="   mx-auto
+    max-w-7xl
+    overflow-hidden
+    px-5
+    sm:px-6
+    py-20
+    sm:py-24
+    lg:py-28"
     >
-      <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
+      <div
+        className="  grid
+    grid-cols-1
+    items-start
+    gap-12
+    sm:gap-16
+    lg:grid-cols-2
+    lg:gap-16"
+      >
         {/* LEFT */}
         <div className="lg:sticky lg:top-24">
-          <p className="mb-4 font-sans text-xs tracking-[0.2em] text-ink/50">
+          <p
+            className="mb-4
+    font-sans
+    text-[10px]
+    tracking-[0.2em]
+    text-ink/50 dark:text-cream/50
+    sm:text-xs"
+          >
             01. WHAT I DO
           </p>
 
-          <h2 className="max-w-lg font-serif text-4xl leading-[1.05] lg:text-6xl">
+          <h2 className="   max-w-lg
+    font-serif
+    text-4xl
+     text-ink dark:text-cream 
+    leading-[1.05]
+    sm:text-5xl
+    lg:text-6xl">
             More than just
             <br />
             <span className="italic">writing code.</span>
           </h2>
 
-          <p className="mt-6 max-w-md font-sans text-base leading-7 text-ink/65">
+          <p className="  mt-5
+    max-w-md
+    font-sans
+    text-sm
+    leading-7
+    text-ink/65 dark:text-cream/65
+    sm:mt-6
+    sm:text-base">
             I build digital products from interface to functionality, while
             exploring the systems and ideas that make them work.
           </p>
 
-          <div className="mt-8 flex items-center gap-3">
-            <CornerDownRight size={20} className="text-ink/50" />
+          <div className="mt-6 flex items-center gap-3 sm:mt-8">
+            <CornerDownRight size={18} className="text-ink/50 dark:text-cream/50 sm:h-5 sm:w-5"/>
 
-            <span className="font-hand text-lg text-ink/60">
+            <span className="font-hand text-lg text-ink/60 dark:text-cream/60">
               things in my toolbox
             </span>
           </div>
 
           {/* Skill labels */}
-          <div className="mt-10 flex max-w-md flex-wrap gap-2">
+          <div className="   mt-8
+    flex
+    max-w-md
+    flex-wrap
+    gap-2
+    sm:mt-10">
             {[
               "React",
               "Next.js",
@@ -110,7 +150,7 @@ export default function Skills() {
             ].map((tool) => (
               <span
                 key={tool}
-                className="rounded-full border border-ink/15 px-3 py-1.5 font-mono text-[11px] text-ink/60"
+                className="rounded-full border border-ink/15 px-2.5 py-1.5 font-mono text-[10px] sm:px-3 sm:text-[11px] text-ink/60 dark:border-cream/15 dark:text-cream/60"
               >
                 {tool}
               </span>
@@ -119,18 +159,18 @@ export default function Skills() {
         </div>
 
         {/* RIGHT — TOOLBOX */}
-        <div className="relative min-h-[520px]">
+        <div className="relative min-h-130">
           {/* Background shape */}
-          <div className="absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink/[0.035]" />
+          <div className="absolute left-1/2 top-1/2 hidden h-97.5 w-97.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink/[0.035] dark:bg-cream/[0.035] lg:block" />
 
           {/* Decorative star */}
-          <span className="absolute left-[45%] top-0 select-none text-2xl text-ink/40">
+          <span className="absolute left-[45%] top-0 select-none text-2xl text-ink/40 dark:text-cream/40">
             ✦
           </span>
 
           {/* Handwritten note */}
           <div className="absolute bottom-2 right-0 z-50">
-            <p className="rotate-[-5deg] text-right font-hand text-lg leading-tight text-ink/60">
+            <p className="rotate-[-5deg] text-right font-hand text-lg leading-tight text-ink/60 dark:text-cream/60">
               hover the tools
               <br />
               to peek inside →
@@ -156,17 +196,17 @@ export default function Skills() {
               >
                 <div
                   className={`
-                    relative rounded-2xl border p-5
+                    relative rounded-2xl border p-4 sm:p-5
                     shadow-[0_15px_35px_rgba(31,42,29,0.10)]
                     transition-all duration-500 ease-out
                     ${
                       skill.dark
-                        ? "border-ink bg-ink text-cream"
-                        : "border-ink/10 bg-white text-ink"
+                        ? "border-ink bg-ink text-cream dark:border-cream/10 dark:bg-[#293527] dark:text-cream"
+                        : "border-ink/10 bg-white text-ink dark:border-cream/10 dark:bg-[#293527] dark:text-cream"
                     }
                     ${
                       isActive
-                        ? "translate-y-[-12px] rotate-0 scale-[1.04] shadow-[0_25px_50px_rgba(31,42,29,0.18)]"
+                        ? "-translate-y-3 rotate-0 scale-[1.04] shadow-[0_25px_50px_rgba(31,42,29,0.18)]"
                         : ""
                     }
                   `}
@@ -175,7 +215,7 @@ export default function Skills() {
                   <div className="flex items-start justify-between">
                     <span
                       className={`font-mono text-[10px] ${
-                        skill.dark ? "text-cream/40" : "text-ink/35"
+                        skill.dark ? "text-cream/40" : "text-ink/35 dark:text-cream/40"
                       }`}
                     >
                       {skill.number}
@@ -184,21 +224,19 @@ export default function Skills() {
                     <Icon
                       size={19}
                       strokeWidth={1.5}
-                      className={
-                        skill.dark ? "text-cream/70" : "text-ink/60"
-                      }
+                      className={skill.dark ? "text-cream/70" : "text-ink/60 dark:text-cream/70"}
                     />
                   </div>
 
                   {/* Title */}
-                  <h3 className="mt-8 font-sans text-lg font-medium">
+                  <h3 className="mt-6 font-sans text-base font-medium sm:mt-8 sm:text-lg">
                     {skill.title}
                   </h3>
 
                   {/* Description */}
                   <p
-                    className={`mt-2 font-sans text-xs leading-5 ${
-                      skill.dark ? "text-cream/65" : "text-ink/55"
+                    className={`mt-2 font-sans text-[11px] leading-5 sm:text-xs ${
+                      skill.dark ? "text-cream/65" : "text-ink/55 dark:text-cream/65"
                     }`}
                   >
                     {skill.description}
@@ -208,16 +246,12 @@ export default function Skills() {
                   <div
                     className={`
                       mt-5 overflow-hidden transition-all duration-500
-                      ${
-                        isActive
-                          ? "max-h-20 opacity-100"
-                          : "max-h-0 opacity-0"
-                      }
+                      ${isActive ? "max-h-20 opacity-100" : "max-h-0 opacity-0"}
                     `}
                   >
                     <div
                       className={`mb-3 h-px ${
-                        skill.dark ? "bg-cream/15" : "bg-ink/10"
+                        skill.dark ? "bg-cream/15" : "bg-ink/10 dark:bg-cream/15"
                       }`}
                     />
 
@@ -228,7 +262,7 @@ export default function Skills() {
                           className={`rounded-full px-2 py-1 font-mono text-[9px] ${
                             skill.dark
                               ? "bg-cream/10 text-cream/70"
-                              : "bg-ink/5 text-ink/55"
+                              : "bg-ink/5 text-ink/55 dark:bg-cream/10 dark:text-cream/70"
                           }`}
                         >
                           {tool}
@@ -256,13 +290,13 @@ export default function Skills() {
 
           {/* Toolbox base / visual anchor */}
           <div className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 lg:block">
-            <div className="relative h-16 w-72 rounded-xl border border-ink/10 bg-ink/[0.04]">
-              <div className="absolute left-1/2 top-[-8px] h-3 w-20 -translate-x-1/2 rounded-t-full border border-ink/10 bg-white" />
+            <div className="relative h-16 w-72 rounded-xl border border-ink/10 bg-ink/4 dark:border-cream/10 dark:bg-cream/4">
+              <div className="absolute left-1/2 -top-2 h-3 w-20 -translate-x-1/2 rounded-t-full border border-ink/10 bg-white dark:border-cream/10 dark:bg-[#293527]" />
 
-              <div className="absolute bottom-4 left-5 h-1.5 w-12 rounded-full bg-ink/10" />
-              <div className="absolute bottom-4 right-5 h-1.5 w-20 rounded-full bg-ink/10" />
+              <div className="absolute bottom-4 left-5 h-1.5 w-12 rounded-full bg-ink/10 dark:bg-cream/10" />
+              <div className="absolute bottom-4 right-5 h-1.5 w-20 rounded-full bg-ink/10 dark:bg-cream/10" />
 
-              <p className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.25em] text-ink/35">
+              <p className="absolute inset-0 flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.25em] text-ink/35 dark:text-cream/35">
                 bigamaks / toolbox
               </p>
             </div>
@@ -278,14 +312,14 @@ export default function Skills() {
                   key={skill.title}
                   className={`rounded-2xl border p-5 ${
                     skill.dark
-                      ? "border-ink bg-ink text-cream"
-                      : "border-ink/10 bg-white text-ink"
+                      ? "border-ink bg-ink text-cream dark:border-cream/10 dark:bg-[#293527] dark:text-cream"
+                      : "border-ink/10 bg-white text-ink dark:border-cream/10 dark:bg-[#293527] dark:text-cream"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <span
                       className={`font-mono text-[10px] ${
-                        skill.dark ? "text-cream/40" : "text-ink/35"
+                        skill.dark ? "text-cream/40" : "text-ink/35 dark:text-cream/40"
                       }`}
                     >
                       {skill.number}
@@ -300,7 +334,7 @@ export default function Skills() {
 
                   <p
                     className={`mt-2 text-xs leading-5 ${
-                      skill.dark ? "text-cream/65" : "text-ink/55"
+                      skill.dark ? "text-cream/65" : "text-ink/55 dark:text-cream/65"
                     }`}
                   >
                     {skill.description}
@@ -313,7 +347,7 @@ export default function Skills() {
                         className={`rounded-full px-2 py-1 font-mono text-[9px] ${
                           skill.dark
                             ? "bg-cream/10 text-cream/70"
-                            : "bg-ink/5 text-ink/55"
+                            : "bg-ink/5 text-ink/55 dark:bg-cream/10 dark:text-cream/70"
                         }`}
                       >
                         {tool}

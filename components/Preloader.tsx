@@ -71,6 +71,8 @@ export default function Preloader() {
               tracking-tight
               sm:text-8xl
               md:text-9xl
+              text-ink
+              dark:text-cream
             "
           >
             chiamaka
@@ -79,7 +81,7 @@ export default function Preloader() {
           {/* Signature stroke */}
           <svg
             viewBox="0 0 600 120"
-            className="pointer-events-none absolute -bottom-8 left-1/2 z-20 w-[125%] -translate-x-1/2 overflow-visible"
+            className="pointer-events-none absolute -bottom-8 left-1/2 z-20 w-[125%] -translate-x-1/2 overflow-visible text-ink dark:text-cream"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >

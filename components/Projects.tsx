@@ -9,6 +9,7 @@ import {
   ArrowUpRight,
   ExternalLink,
 } from "lucide-react";
+import Image from "next/image";
 
 type ProjectPreviewType = "dashboard" | "ai" | "commerce";
 
@@ -20,6 +21,9 @@ type FeaturedProject = {
   tags: string[];
   type: ProjectPreviewType;
   rotate: string;
+  image: string;
+  liveUrl: string;
+  githubUrl: string;
 };
 
 const featuredProjects: FeaturedProject[] = [
@@ -30,6 +34,9 @@ const featuredProjects: FeaturedProject[] = [
     description:
       "A physiotherapy practice-management platform designed around the workflows of patients, therapists and administrators.",
     tags: ["React", "TypeScript", "Supabase", "Tailwind"],
+    image: "/projects/physiotrack.png",
+    liveUrl: "https://physio-track-lbay-8oxtqgkc5-chiamakas-projects-d1a0fefe.vercel.app",
+    githubUrl: "https://github.com/bigamaks/PhysioTrack",
     type: "dashboard",
     rotate: "-rotate-2",
   },
@@ -40,6 +47,9 @@ const featuredProjects: FeaturedProject[] = [
     description:
       "An AI rehabilitation companion exploring how personalized guidance can make recovery more accessible and engaging.",
     tags: ["Next.js", "TypeScript", "Gemini", "Supabase"],
+    image: "/projects/physiopal.png",
+    liveUrl: "https://physio-pal-ai.vercel.app/",
+    githubUrl: "https://github.com/bigamaks/PhysioPal-Ai",
     type: "ai",
     rotate: "rotate-2",
   },
@@ -50,6 +60,9 @@ const featuredProjects: FeaturedProject[] = [
     description:
       "A business-management platform I'm building to explore inventory, sales and product workflows for growing businesses.",
     tags: ["React", "TypeScript", "Supabase"],
+    image: "/projects/physiotrack.png",
+    liveUrl: "https://your-physiotrack-url.com",
+    githubUrl: "https://github.com/bigamaks/PhysioTrack",
     type: "commerce",
     rotate: "-rotate-1",
   },
@@ -111,18 +124,18 @@ export default function Projects() {
 
       <div className="mb-16 grid grid-cols-1 items-end gap-8 lg:grid-cols-[1fr_320px]">
         <div>
-          <p className="mb-4 font-sans text-xs tracking-[0.2em] text-ink/50">
+          <p className="mb-4 font-sans text-xs tracking-[0.2em] text-ink/50 dark:text-cream/50">
             02. SELECTED WORK
           </p>
 
-          <h2 className="max-w-2xl font-serif text-4xl leading-[1.05] md:text-5xl lg:text-6xl">
+          <h2 className="max-w-2xl font-serif text-4xl leading-[1.05] text-ink dark:text-cream md:text-5xl lg:text-6xl">
             Things I&apos;ve been
             <br />
             <span className="italic">building & figuring out.</span>
           </h2>
         </div>
 
-        <p className="max-w-sm font-sans text-sm leading-6 text-ink/65 lg:pb-1">
+        <p className="max-w-sm font-sans text-sm leading-6 text-ink/65 dark:text-cream/65 lg:pb-1">
           A collection of products, experiments and ideas that have helped me
           learn how to build beyond the interface.
         </p>
@@ -135,14 +148,14 @@ export default function Projects() {
       <div className="relative">
         {/* Controls */}
         <div className="mb-6 flex items-center justify-between">
-          <p className="font-hand text-lg text-ink/55">
+         <p className="font-hand text-lg text-ink/55 dark:text-cream/55">
             a few things I&apos;ve made ✦
           </p>
 
           <div className="flex gap-2">
             <button
               onClick={() => scroll("left")}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 transition hover:bg-ink hover:text-cream"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/15  text-ink transition hover:bg-ink hover:text-cream dark:border-cream/15 dark:text-cream dark:hover:bg-cream dark:hover:text-ink"
               aria-label="Previous project"
             >
               <ArrowLeft size={16} />
@@ -150,7 +163,7 @@ export default function Projects() {
 
             <button
               onClick={() => scroll("right")}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 transition hover:bg-ink hover:text-cream"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 transition hover:bg-ink hover:text-cream dark:border-cream/15 dark:text-cream dark:hover:bg-cream dark:hover:text-ink"
               aria-label="Next project"
             >
               <ArrowRight size={16} />
@@ -161,7 +174,7 @@ export default function Projects() {
         {/* Project track */}
         <div
           ref={trackRef}
-          className="flex snap-x snap-mandatory gap-8 overflow-x-auto pb-8 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory gap-8 overflow-x-auto pb-8 scroll-smooth scrollbar-none [&::-webkit-scrollbar]:hidden"
         >
           {featuredProjects.map((project, index) => (
             <motion.article
@@ -188,32 +201,48 @@ export default function Projects() {
               }}
               className={`group snap-start shrink-0 w-[min(82vw,620px)] ${project.rotate}`}
             >
-              <div className="overflow-hidden rounded-[24px] border border-ink/10 bg-white shadow-[0_15px_40px_rgba(31,42,29,0.08)] transition duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_25px_60px_rgba(31,42,29,0.14)]">
+              <div className="overflow-hidden rounded-3xl border border-ink/10 bg-white text-ink shadow-[0_15px_40px_rgba(31,42,29,0.08)] transition duration-500 group-hover:-translate-y-2 group-hover:shadow-[0_25px_60px_rgba(31,42,29,0.14)] dark:border-cream/10 dark:bg-[#293527] dark:text-cream dark:shadow-[0_15px_40px_rgba(0,0,0,0.25)]">
                 {/* Project preview */}
-                <ProjectPreview type={project.type} />
+                {/* <ProjectPreview type={project.type} >
+                                <Image
+    src={project.image}
+    alt="PhysioTrack dashboard"
+    fill
+    className="object-cover"
+  />
+                   </ ProjectPreview> */}
+
+                <div className="relative aspect-16/10 overflow-hidden rounded-2xl">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} project screenshot`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
 
                 {/* Project information */}
                 <div className="p-6 md:p-8">
                   <div className="mb-5 flex items-start justify-between gap-4">
                     <div>
-                      <p className="mb-2 font-mono text-[10px] tracking-[0.18em] text-ink/40">
+                      <p className="mb-2 font-mono text-[10px] tracking-[0.18em] text-ink/40 dark:text-cream/40">
                         {project.number} / {project.category}
                       </p>
 
-                      <h3 className="font-serif text-3xl md:text-4xl">
+                      <h3 className="font-serif text-3xl text-ink dark:text-cream md:text-4xl">
                         {project.title}
                       </h3>
                     </div>
 
                     <motion.div
                       whileHover={{ rotate: 45 }}
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/15"
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/15 text-ink dark:border-cream/15 dark:text-cream"
                     >
                       <ArrowUpRight size={17} />
                     </motion.div>
                   </div>
 
-                  <p className="max-w-xl font-sans text-sm leading-6 text-ink/65 md:text-base">
+                  <p className="max-w-xl font-sans text-sm leading-6 text-ink/65 dark:text-cream/65 md:text-base">
                     {project.description}
                   </p>
 
@@ -221,7 +250,7 @@ export default function Projects() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-ink/5 px-3 py-1.5 font-mono text-[10px] text-ink/55"
+                        className="rounded-full bg-ink/5 px-3 py-1.5 font-mono text-[10px] text-ink/55 dark:bg-cream/10 dark:text-cream/65"
                       >
                         {tag}
                       </span>
@@ -231,8 +260,10 @@ export default function Projects() {
                   {/* Links */}
                   <div className="mt-7 flex gap-5">
                     <a
-                      href="#"
-                      className="group/link flex items-center gap-2 border-b border-ink pb-1 font-sans text-xs"
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/link flex items-center gap-2 border-b border-ink pb-1 font-sans text-xs text-ink dark:border-cream dark:text-cream"
                     >
                       Live project
                       <ExternalLink
@@ -241,13 +272,15 @@ export default function Projects() {
                       />
                     </a>
 
- <a
-  href="#"
-  className="group/link flex items-center gap-2 border-b border-ink/20 pb-1 font-sans text-xs text-ink/60"
->
-  GitHub
-  <span className="text-[10px] font-medium">GH</span>
-</a>
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/link flex items-center gap-2 border-b border-ink/20 pb-1 font-sans text-xs text-ink/60 dark:border-cream/20 dark:text-cream/60"
+                    >
+                      GitHub
+                      <span className="text-[10px] font-medium">GH</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -260,19 +293,19 @@ export default function Projects() {
           OTHER EXPERIMENTS
       ========================================== */}
 
-      <div className="mt-24 border-t border-ink/10 pt-16">
+      <div className="mt-24 border-t border-ink/10 pt-16 dark:border-cream/10">
         <div className="mb-10 flex items-end justify-between gap-6">
           <div>
-            <p className="mb-3 font-sans text-xs tracking-[0.2em] text-ink/50">
+            <p className="mb-3 font-sans text-xs tracking-[0.2em] text-ink/50 dark:text-cream/50">
               OTHER EXPERIMENTS
             </p>
 
-            <h3 className="font-serif text-3xl md:text-4xl">
+            <h3 className="font-serif text-3xl text-ink dark:text-cream md:text-4xl">
               Smaller things I&apos;ve built.
             </h3>
           </div>
 
-          <span className="hidden font-hand text-lg text-ink/50 md:block">
+          <span className="hidden font-hand text-lg text-ink/50 dark:text-cream/50 md:block">
             still learning, still building ✦
           </span>
         </div>
@@ -289,24 +322,24 @@ export default function Projects() {
                 delay: index * 0.08,
               }}
               whileHover={{ y: -4 }}
-              className="group rounded-2xl border border-ink/10 bg-white/60 p-6 transition-shadow duration-300 hover:shadow-lg"
+              className="group rounded-2xl border border-ink/10 bg-white/60 p-6 transition-shadow duration-300 hover:shadow-lg dark:border-cream/10 dark:bg-[#293527]/70 dark:text-cream"
             >
               <div className="flex items-start justify-between gap-5">
                 <div>
-                  <p className="mb-2 font-mono text-[10px] text-ink/35">
+                  <p className="mb-2 font-mono text-[10px] text-ink/35 dark:text-cream/35">
                     {project.number}
                   </p>
 
                   <h4 className="font-serif text-xl">{project.title}</h4>
 
-                  <p className="mt-2 max-w-md font-sans text-sm leading-5 text-ink/60">
+                  <p className="mt-2 max-w-md font-sans text-sm leading-5 text-ink/60 dark:text-cream/60">
                     {project.description}
                   </p>
                 </div>
 
                 <ArrowUpRight
                   size={17}
-                  className="shrink-0 text-ink/40 transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-ink"
+                  className="shrink-0 text-ink/40 transition duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-ink dark:text-cream/40 dark:group-hover:text-cream"
                 />
               </div>
 
@@ -314,7 +347,7 @@ export default function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[9px] text-ink/50"
+                    className="rounded-full bg-ink/5 px-2.5 py-1 font-mono text-[9px] text-ink/50 dark:bg-cream/10 dark:text-cream/60"
                   >
                     {tag}
                   </span>
@@ -332,11 +365,7 @@ export default function Projects() {
    PROJECT PREVIEW
 ========================================= */
 
-function ProjectPreview({
-  type,
-}: {
-  type: "dashboard" | "ai" | "commerce";
-}) {
+function ProjectPreview({ type }: { type: "dashboard" | "ai" | "commerce" }) {
   if (type === "dashboard") {
     return (
       <div className="relative h-72 overflow-hidden bg-[#E5EADF] p-6 md:h-80">
@@ -395,7 +424,7 @@ function ProjectPreview({
                         }}
                         className="flex-1 rounded-t bg-ink/15"
                       />
-                    )
+                    ),
                   )}
                 </div>
               </div>

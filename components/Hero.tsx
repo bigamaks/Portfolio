@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 import {
   ArrowRight,
@@ -48,7 +43,7 @@ const tools = [
     position: "top-[4%] left-[5%]",
     rotate: -8,
     delay: 0.75,
-    color: "bg-white text-ink",
+    color: "bg-white text-ink dark:bg-[#293527] dark:text-cream",
   },
   {
     id: "next",
@@ -57,7 +52,7 @@ const tools = [
     position: "top-[6%] right-[5%]",
     rotate: 7,
     delay: 0.85,
-    color: "bg-ink text-cream",
+    color: "bg-ink text-cream dark:bg-cream dark:text-ink",
   },
   {
     id: "code",
@@ -66,7 +61,8 @@ const tools = [
     position: "top-[31%] left-[-2%]",
     rotate: -12,
     delay: 0.95,
-    color: "bg-[#DCE5D4] text-ink",
+    color:
+      "bg-[#DCE5D4] text-ink dark:bg-[#465642] dark:text-cream",
   },
   {
     id: "database",
@@ -75,7 +71,8 @@ const tools = [
     position: "bottom-[25%] left-[3%]",
     rotate: 8,
     delay: 1.05,
-    color: "bg-[#E8DDD2] text-ink",
+    color:
+      "bg-[#E8DDD2] text-ink dark:bg-[#554940] dark:text-cream",
   },
   {
     id: "git",
@@ -84,7 +81,7 @@ const tools = [
     position: "bottom-[8%] right-[5%]",
     rotate: -6,
     delay: 1.15,
-    color: "bg-white text-ink",
+    color: "bg-white text-ink dark:bg-[#293527] dark:text-cream",
   },
   {
     id: "ui",
@@ -93,7 +90,8 @@ const tools = [
     position: "bottom-[31%] right-[-1%]",
     rotate: 10,
     delay: 1.25,
-    color: "bg-[#DCE5D4] text-ink",
+    color:
+      "bg-[#DCE5D4] text-ink dark:bg-[#465642] dark:text-cream",
   },
 ];
 
@@ -151,11 +149,14 @@ function ToolCard({
         absolute ${position}
         z-30
         flex items-center gap-2
-        px-3 py-2
+        px-2.5 py-1.5
+sm:px-3 sm:py-2
         rounded-xl
-        border border-ink/10
-        shadow-[0_8px_25px_rgba(31,42,29,0.08)]
-        font-mono text-[11px]
+        border border-ink/10 dark:border-cream/10
+shadow-[0_8px_25px_rgba(31,42,29,0.08)] dark:shadow-[0_8px_25px_rgba(0,0,0,0.25)]
+        font-mono text-[9px]
+sm:text-[10px]
+lg:text-[11px]
         cursor-default
         ${color}
       `}
@@ -170,13 +171,7 @@ function ToolCard({
    Decorative particle
 --------------------------------------- */
 
-function Particle({
-  className,
-  delay,
-}: {
-  className: string;
-  delay: number;
-}) {
+function Particle({ className, delay }: { className: string; delay: number }) {
   return (
     <motion.div
       initial={{
@@ -192,7 +187,7 @@ function Particle({
         duration: 1.2,
         ease: "easeOut",
       }}
-      className={`absolute w-2 h-2 rounded-full bg-ink/30 ${className}`}
+      className={`absolute w-2 h-2 rounded-full bg-ink/30 dark:bg-cream/30 ${className}`}
     />
   );
 }
@@ -205,25 +200,17 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isReady, setIsReady] = useState(false);
 
-useEffect(() => {
-  const handlePreloaderComplete = () => {
-    setIsReady(true);
-  };
+  useEffect(() => {
+    const handlePreloaderComplete = () => {
+      setIsReady(true);
+    };
 
-  window.addEventListener(
-    "preloaderComplete",
-    handlePreloaderComplete
-  );
+    window.addEventListener("preloaderComplete", handlePreloaderComplete);
 
-  return () => {
-    window.removeEventListener(
-      "preloaderComplete",
-      handlePreloaderComplete
-    );
-  };
-}, []);
-
-
+    return () => {
+      window.removeEventListener("preloaderComplete", handlePreloaderComplete);
+    };
+  }, []);
 
   /* ---------------------------------------
      Mouse interaction
@@ -242,44 +229,28 @@ useEffect(() => {
     damping: 20,
   });
 
-  const handleMouseMove = (
-    event: React.MouseEvent<HTMLElement>
-  ) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
 
-    const x =
-      (event.clientX - rect.left) / rect.width - 0.5;
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
 
-    const y =
-      (event.clientY - rect.top) / rect.height - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
 
     mouseX.set(x * 18);
     mouseY.set(y * 18);
   };
 
-  const toolboxX = useTransform(
-    springX,
-    (value) => value * 0.35
-  );
+  const toolboxX = useTransform(springX, (value) => value * 0.35);
 
-  const toolboxY = useTransform(
-    springY,
-    (value) => value * 0.35
-  );
+  const toolboxY = useTransform(springY, (value) => value * 0.35);
 
-  const cursorX = useTransform(
-    springX,
-    (value) => value * -0.6
-  );
+  const cursorX = useTransform(springX, (value) => value * -0.6);
 
-  const cursorY = useTransform(
-    springY,
-    (value) => value * -0.6
-  );
+  const cursorY = useTransform(springY, (value) => value * -0.6);
 
   if (!isReady) {
-  return null;
-}
+    return null;
+  }
 
   return (
     <motion.section
@@ -288,27 +259,25 @@ useEffect(() => {
       animate="show"
       onMouseMove={handleMouseMove}
       className="
-        max-w-7xl
-        mx-auto
-        px-6
-        pt-32
-        pb-24
-        overflow-hidden
+         max-w-7xl
+  mx-auto
+  px-5 sm:px-6
+  pt-24 sm:pt-28 lg:pt-32
+  pb-16 sm:pb-20 lg:pb-24
+  overflow-hidden
       "
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* =====================================
             LEFT — TEXT
         ===================================== */}
 
         <div className="relative z-10">
-
           <motion.div
             variants={fadeUp}
             className="relative inline-block mb-10 -rotate-2"
           >
-            <p className="font-hand text-2xl text-ink/80">
+            <p className="font-hand text-2xl text-ink/80 dark:text-cream/80">
               frontend developer & product enthusiast
             </p>
 
@@ -317,7 +286,7 @@ useEffect(() => {
               height="40"
               viewBox="0 0 90 40"
               fill="none"
-              className="absolute -bottom-8 left-2"
+              className="absolute -bottom-8 left-2 text-ink dark:text-cream"
             >
               <motion.path
                 initial={{
@@ -333,7 +302,7 @@ useEffect(() => {
                   duration: 0.6,
                 }}
                 d="M8 6 Q 35 32, 60 22"
-                stroke="#1F2A1D"
+                stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 fill="none"
@@ -353,7 +322,7 @@ useEffect(() => {
                   duration: 0.4,
                 }}
                 d="M52 15 L62 22 L52 27"
-                stroke="#1F2A1D"
+                stroke="currentColor"
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -365,59 +334,60 @@ useEffect(() => {
           <motion.h1
             variants={fadeUp}
             className="
-              font-serif
-              text-5xl
-              lg:text-6xl
-              leading-[1.1]
-              mb-6
+               font-serif
+  text-4xl
+  sm:text-5xl
+  lg:text-6xl
+  leading-[1.08]
+  mb-6
             "
           >
-            Frontend developer building{" "}
-            <span className="italic">
-              thoughtful
-            </span>{" "}
-            digital experiences.
+            Frontend developer building
+            <span className="italic"> thoughtful</span> digital experiences.
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="
               font-sans
-              text-base
-              text-ink/70
-              max-w-md
-              mb-8
+  text-sm
+  sm:text-base
+  leading-relaxed
+  text-ink/70
+    dark:text-cream/70
+  max-w-md
+  mb-8
             "
           >
-            I turn ideas into responsive, accessible
-            products with React — and I&apos;m exploring
-            the intersection of frontend, AI, and product.
+            I turn ideas into responsive, accessible products with React — and
+            I&apos;m exploring the intersection of frontend, AI, and product.
           </motion.p>
 
-          <motion.button
+          <motion.a
+            href="#projects"
             variants={fadeUp}
             className="
-              group
-              flex
-              items-center
-              gap-2
-              font-sans
-              text-sm
-              border-b
-              border-ink
-              pb-1
-            "
+    group
+    inline-flex
+    items-center
+    gap-2
+    font-sans
+    text-sm
+    border-b
+    border-ink
+    dark:border-cream
+    pb-1
+  "
           >
             View my work
-
             <ArrowRight
               size={16}
               className="
-                transition-transform
-                group-hover:translate-x-1
-              "
+      transition-transform
+      group-hover:translate-x-1
+    "
             />
-          </motion.button>
+          </motion.a>
         </div>
 
         {/* =====================================
@@ -426,14 +396,16 @@ useEffect(() => {
 
         <div
           className="
-            relative
-            min-h-[520px]
-            flex
-            items-center
-            justify-center
+             relative
+    min-h-97.5
+    sm:min-h-115
+    lg:min-h-130
+    flex
+    items-center
+    justify-center
+    w-full
           "
         >
-
           {/* Background circle */}
 
           <motion.div
@@ -454,36 +426,28 @@ useEffect(() => {
               delay: 0.1,
             }}
             className="
-              absolute
-              w-[350px]
-              h-[350px]
-              rounded-full
-              border
-              border-ink/5
+                absolute
+  w-65
+  h-65
+  sm:w-[320px]
+  sm:h-80
+  lg:w-87.5
+  lg:h-87.5
+  rounded-full
+  border
+border-ink/5 dark:border-cream/10
             "
           />
 
           {/* Explosion particles */}
 
-          <Particle
-            className="top-[18%] left-[25%]"
-            delay={0.7}
-          />
+          <Particle className="top-[18%] left-[25%]" delay={0.7} />
 
-          <Particle
-            className="top-[25%] right-[24%]"
-            delay={0.8}
-          />
+          <Particle className="top-[25%] right-[24%]" delay={0.8} />
 
-          <Particle
-            className="bottom-[26%] left-[25%]"
-            delay={0.9}
-          />
+          <Particle className="bottom-[26%] left-[25%]" delay={0.9} />
 
-          <Particle
-            className="bottom-[19%] right-[25%]"
-            delay={1}
-          />
+          <Particle className="bottom-[19%] right-[25%]" delay={1} />
 
           {/* Flying tools */}
 
@@ -511,11 +475,10 @@ useEffect(() => {
             className="
               relative
               z-20
-              w-[270px]
-              h-[220px]
+              w-67.5
+              h-55
             "
           >
-
             {/* Explosion glow */}
 
             <motion.div
@@ -535,7 +498,7 @@ useEffect(() => {
               className="
                 absolute
                 inset-0
-                bg-ink/[0.04]
+               bg-ink/4 dark:bg-cream/5
                 rounded-full
                 blur-2xl
               "
@@ -565,14 +528,13 @@ useEffect(() => {
                 bottom-0
                 left-1/2
                 -translate-x-1/2
-                w-[230px]
-                h-[150px]
-                bg-ink
+                w-57.5
+                h-37.5
+                bg-ink dark:bg-[#293527]
                 rounded-[28px]
                 shadow-[0_25px_60px_rgba(31,42,29,0.16)]
               "
             >
-
               {/* Toolbox front */}
 
               <div
@@ -581,26 +543,25 @@ useEffect(() => {
                   bottom-0
                   left-0
                   right-0
-                  h-[105px]
-                  rounded-[24px]
-                  bg-ink
+                  h-26.25
+                  rounded-3xl
+                  bg-ink dark:bg-[#293527]
                 "
               >
-
                 {/* Handle */}
 
                 <div
                   className="
                     absolute
-                    -top-[38px]
+                    -top-9.5
                     left-1/2
                     -translate-x-1/2
-                    w-[85px]
-                    h-[55px]
-                    border-[8px]
-                    border-ink
+                    w-21.25
+                    h-13.75
+                    border-8
+                    border-ink dark:border-[#293527]
                     border-b-0
-                    rounded-t-[24px]
+                    rounded-t-3xl
                   "
                 />
 
@@ -632,7 +593,7 @@ useEffect(() => {
                     font-mono
                     text-[9px]
                     tracking-[0.3em]
-                    text-cream/40
+                    text-cream/40 
                   "
                 >
                   BIGAMAKS / TOOLS
@@ -663,11 +624,11 @@ useEffect(() => {
               }}
               className="
                 absolute
-                left-[20px]
-                bottom-[105px]
-                w-[230px]
-                h-[60px]
-                bg-ink
+                left-5
+                bottom-26.25
+                w-57.5
+                h-15
+                bg-ink dark:bg-[#293527]
                 rounded-[18px]
                 z-10
                 shadow-lg
@@ -692,15 +653,12 @@ useEffect(() => {
               }}
               className="
                 absolute
-                top-[-75px]
-                left-[40px]
+                -top-18.75
+                left-10
                 z-40
               "
             >
-              <Sparkles
-                size={25}
-                strokeWidth={1.4}
-              />
+              <Sparkles size={25} strokeWidth={1.4} />
             </motion.div>
 
             <motion.div
@@ -718,15 +676,12 @@ useEffect(() => {
               }}
               className="
                 absolute
-                top-[-60px]
-                right-[35px]
+                -top-15
+                right-8.75
                 z-40
               "
             >
-              <Sparkles
-                size={17}
-                strokeWidth={1.4}
-              />
+              <Sparkles size={17} strokeWidth={1.4} />
             </motion.div>
           </motion.div>
 
@@ -789,7 +744,7 @@ useEffect(() => {
               left-[12%]
               font-hand
               text-sm
-              text-ink/60
+              text-ink/60 
             "
           >
             things I use to build ✦
@@ -822,6 +777,7 @@ useEffect(() => {
               px-3
               py-2
               bg-[#E8DDD2]
+              dark:bg-[#554940]
               rounded-xl
               font-mono
               text-xs
